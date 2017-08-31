@@ -1,26 +1,29 @@
+var webpack = require('webpack');
 const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+var BUILD_DIR = path.resolve(__dirname, 'src/frontend/public');
+var APP_DIR = path.resolve(__dirname, 'src/frontend/app');
 
 module.exports = {
-  entry: './index.js',
+  entry: APP_DIR + '/index.jsx',
   output: {
-    filename: './bundle.js',
-    path: path.join(__dirname, 'dist'),
+    path: BUILD_DIR,
+    filename: 'js/bundle.js'
   },
   module: {
-    rules: [
+    loaders: [
       {
-        test: /\.js$/,
-        exclude: /node_modules/,
-        use: ['babel-loader'],
+        test: /\.jsx?$/,
+        include : APP_DIR,
+        exclude: /(node_modules|bower_components)/,
+        loaders: ['jsx-loader', 'babel-loader']
       },
       {
-        test: /\.css$/,
-        use: ['style-loader'],
-      },
-    ],
+          test: /\.scss$/,
+          loaders: ['style-loader', 'css-loader', 'sass-loader']
+      }
+    ]
   },
-  plugins: [
-    new HtmlWebpackPlugin()
-  ],
+  resolve: {
+    extensions: ['.js', '.jsx'],
+  }
 };
