@@ -1,3 +1,11 @@
+# Starting up the server
+1. npm i - to install all dependencies 
+2. npm i json-server -g
+3. json-server db.json
+4. npm run dev
+5. browse to localhost:8080 or build
+
+
 # Front-End Interview Test
 
 This is a simple front-end code challenge created to serve two purposes:
